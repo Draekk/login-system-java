@@ -2,10 +2,11 @@ package src.Models;
 
 import java.util.UUID;
 
-public class Profile {
+public class Profile extends User {
 
   // #region Attributes
-  private UUID id;
+  private UUID profId;
+  private UUID userId;
   private String name;
   private String lastName;
   private String email;
@@ -14,8 +15,12 @@ public class Profile {
   // #endregion
 
   // #region Getters and Setters
-  public UUID getId() {
-    return this.id;
+  public void setUserId(UUID id) {
+    this.userId = id;
+  }
+
+  public UUID getProfId() {
+    return this.profId;
   }
 
   public String getName() {
@@ -54,9 +59,12 @@ public class Profile {
   // #region Overrides methods
   @Override
   public String toString() {
-    return "ID: " + this.id + "\n" +
+    return "ID: " + this.profId + "\n" +
+        "User ID: " + userId + "\n" +
         "Name: " + this.name + "\n" +
-        "Last name: " + this.email + "\n";
+        "Last name: " + this.email + "\n" +
+        "Email: " + this.email + "\n" +
+        "Age: " + this.age + "\n";
   }
   // #endregion
 
@@ -65,7 +73,7 @@ public class Profile {
   }
 
   public Profile(String name, String lastName, String email, int age) {
-    this.id = UUID.randomUUID();
+    this.profId = UUID.randomUUID();
     this.name = name;
     this.lastName = lastName;
     this.email = email;
