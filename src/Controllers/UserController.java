@@ -7,7 +7,7 @@ import Models.User;
 
 public class UserController {
   /**
-   * Add new user to the user list
+   * Adds new user to the user list
    * 
    * @param user user to add.
    * @return {@code true} if the user is added correctly
@@ -34,6 +34,29 @@ public class UserController {
     } catch (Exception e) {
       System.out.printf("An error has occurred: %s", e.getMessage());
       return false;
+    }
+  }
+
+  /**
+   * Search an user in the user list by its id or its username
+   * 
+   * @param idOrUsername can be the user id or the user username
+   * @return {@code User} if is the user is found,
+   *         {@code null} if the user is no found
+   */
+  public User searchUser(String idOrUsername) {
+    try {
+      if (!LoginDB.userDatabase.isEmpty()) {
+        for (User user : LoginDB.userDatabase) {
+          if (user.getId().equals(idOrUsername) || user.getUsername().equals(idOrUsername)) {
+            return user;
+          }
+        }
+      }
+      return null;
+    } catch (Exception e) {
+      System.err.println("An error has occurred: " + e.getMessage());
+      return null;
     }
   }
 
