@@ -1,18 +1,18 @@
-package src.Models;
+package Models;
 
 import java.util.UUID;
 
 public class User {
 
   // #region Attributes
-  protected UUID id;
+  protected String id;
   private Profile profile;
   private String username;
   private String password;
   // #endregion
 
   // #region Getters and Setters
-  public UUID getId() {
+  public String getId() {
     return this.id;
   }
 
@@ -33,10 +33,10 @@ public class User {
   }
   // #endregion
 
-  // #region Overrides methos
+  // #region Overrides methods
   @Override
   public String toString() {
-    return "ID: " + this.id + "\n" +
+    return "User ID: " + this.id + "\n" +
         "Username: " + this.username + "\n" +
         "Password: " + this.password + "\n" +
         "Profile detail:\n" +
@@ -49,10 +49,11 @@ public class User {
   }
 
   public User(String username, String password, String name, String lastName, String email, int age) {
-    this.id = UUID.randomUUID();
+    this.id = UUID.randomUUID().toString().substring(0, 8);
     this.username = username;
     this.password = password;
     this.profile = new Profile(name, lastName, email, age);
     this.profile.setUserId(this.id);
   }
+  // #endregion
 }
