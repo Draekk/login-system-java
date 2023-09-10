@@ -2,7 +2,7 @@ package Models;
 
 import java.util.UUID;
 
-public class User {
+public class User implements Cloneable {
 
   // #region Attributes
   protected String id;
@@ -25,7 +25,7 @@ public class User {
   }
 
   public String getPassword() {
-    return this.password.replace(password, "••••••••");
+    return this.password.replace(password, "********");
   }
 
   public void setPassword(String password) {
@@ -41,6 +41,16 @@ public class User {
         "Password: " + this.getPassword() + "\n" +
         "Profile detail:\n" +
         this.profile;
+  }
+
+  @Override
+  public User clone() throws CloneNotSupportedException {
+    User clone = (User) super.clone();
+    clone.id = this.id;
+    clone.username = this.username;
+    clone.password = this.password;
+    clone.profile = this.profile;
+    return clone;
   }
   // #endregion
 

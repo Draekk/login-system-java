@@ -49,7 +49,7 @@ public class UserController {
       if (!LoginDB.userDatabase.isEmpty()) {
         for (User user : LoginDB.userDatabase) {
           if (user.getId().equals(idOrUsername) || user.getUsername().equals(idOrUsername)) {
-            return user;
+            return user.clone();
           }
         }
       }
@@ -60,17 +60,30 @@ public class UserController {
     }
   }
 
-  // TODO: Method description
-  // public boolean editUser(User user) {
-  // try {
-  // if(!LoginDB.userDatabase.isEmpty()){
-  // //get password encrypted
-  // // String passEncrypted=EncryptionUtils.encryptPassword(user.<PASSWORD>());
-  // }
-  // } catch (Exception e) {
-  // // TODO: handle exception
-  // }
-  // }
+  /**
+   * Sets an existing user with modifications in the user list
+   * 
+   * @param newUser the user with incomming modification
+   * @return {@code true} if the user is set correctly
+   */
+  public boolean editUser(User newUser) {
+    try {
+      if (!LoginDB.userDatabase.isEmpty()) {
+        for (User user : LoginDB.userDatabase) {
+          if (user.getId().equals(newUser.getId())) {
+            LoginDB.userDatabase.set(LoginDB.userDatabase.indexOf(user), newUser);
+            return true;
+          }
+        }
+      } else {
+        throw new Exception("Empty list");
+      }
+      return false;
+    } catch (Exception e) {
+      System.err.println("An error has occurred: " + e.getMessage());
+      return false;
+    }
+  }
 
   /**
    * Shows in console the list of users
