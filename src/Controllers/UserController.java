@@ -1,9 +1,9 @@
 package Controllers;
 
-import java.util.ArrayList;
-
 import Database.LoginDB;
 import Models.User;
+
+import java.util.ArrayList;
 
 public class UserController {
   /**
@@ -52,8 +52,10 @@ public class UserController {
             return user.clone();
           }
         }
+        throw new Exception("User not found");
+      } else {
+        throw new Exception("Empty list!");
       }
-      return null;
     } catch (Exception e) {
       System.err.println("An error has occurred: " + e.getMessage());
       return null;
@@ -75,10 +77,35 @@ public class UserController {
             return true;
           }
         }
+        throw new Exception("User not found");
       } else {
         throw new Exception("Empty list");
       }
+    } catch (Exception e) {
+      System.err.println("An error has occurred: " + e.getMessage());
       return false;
+    }
+  }
+
+  /**
+   * Deletes an user from the user list
+   * 
+   * @param userToDelete user to delete
+   * @return {@code true} if the user is deleted correctly
+   */
+  public boolean deleteUser(User userToDelete) {
+    try {
+      if (!LoginDB.userDatabase.isEmpty()) {
+        for (User user : LoginDB.userDatabase) {
+          if (user.getId().equals(userToDelete.getId())) {
+            LoginDB.userDatabase.remove(LoginDB.userDatabase.indexOf(user));
+            return true;
+          }
+        }
+        throw new Exception("User not found");
+      } else {
+        throw new Exception("Empty list!");
+      }
     } catch (Exception e) {
       System.err.println("An error has occurred: " + e.getMessage());
       return false;
