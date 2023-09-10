@@ -60,6 +60,18 @@ public class UserController {
     }
   }
 
+  // TODO: Method description
+  // public boolean editUser(User user) {
+  // try {
+  // if(!LoginDB.userDatabase.isEmpty()){
+  // //get password encrypted
+  // // String passEncrypted=EncryptionUtils.encryptPassword(user.<PASSWORD>());
+  // }
+  // } catch (Exception e) {
+  // // TODO: handle exception
+  // }
+  // }
+
   /**
    * Shows in console the list of users
    */

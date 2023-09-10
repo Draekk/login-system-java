@@ -25,7 +25,7 @@ public class User {
   }
 
   public String getPassword() {
-    return this.password;
+    return this.password.replace(password, "••••••••");
   }
 
   public void setPassword(String password) {
@@ -38,7 +38,7 @@ public class User {
   public String toString() {
     return "User ID: " + this.id + "\n" +
         "Username: " + this.username + "\n" +
-        "Password: " + this.password + "\n" +
+        "Password: " + this.getPassword() + "\n" +
         "Profile detail:\n" +
         this.profile;
   }
