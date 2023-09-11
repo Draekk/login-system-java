@@ -9,6 +9,7 @@ public class User implements Cloneable {
   private Profile profile;
   private String username;
   private String password;
+  private UserType userType;
   // #endregion
 
   // #region Getters and Setters
@@ -31,6 +32,30 @@ public class User implements Cloneable {
   public void setPassword(String password) {
     this.password = password;
   }
+
+  public UserType getUserType() {
+    return this.userType;
+  }
+
+  public void setUserType(int index) {
+    try {
+      switch (index) {
+        case 0:
+          this.userType = UserType.ADMIN;
+          break;
+        case 1:
+          this.userType = UserType.MODERATOR;
+          break;
+        case 2:
+          this.userType = UserType.MEMBER;
+          break;
+        default:
+          throw new Exception("Index out of range. Index should be between 0 and 2.");
+      }
+    } catch (Exception e) {
+      System.err.println("An error has occurred: " + e.getMessage());
+    }
+  }
   // #endregion
 
   // #region Overrides methods
@@ -39,6 +64,7 @@ public class User implements Cloneable {
     return "User ID: " + this.id + "\n" +
         "Username: " + this.username + "\n" +
         "Password: " + this.getPassword() + "\n" +
+        "User Type: " + this.userType + "\n" +
         "Profile detail:\n" +
         this.profile;
   }
@@ -64,6 +90,7 @@ public class User implements Cloneable {
     this.password = password;
     this.profile = new Profile(name, lastName, email, age);
     this.profile.setUserId(this.id);
+    setUserType(2);
   }
   // #endregion
 }

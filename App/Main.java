@@ -1,5 +1,6 @@
 import Database.LoginDB;
 import Models.User;
+import Models.UserType;
 import Controllers.UserController;
 
 import java.util.ArrayList;

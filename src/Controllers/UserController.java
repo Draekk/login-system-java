@@ -6,6 +6,7 @@ import Models.User;
 import java.util.ArrayList;
 
 public class UserController {
+  // #region CRUD User
   /**
    * Adds new user to the user list
    * 
@@ -111,6 +112,7 @@ public class UserController {
       return false;
     }
   }
+  // #endregion
 
   /**
    * Shows in console the list of users
