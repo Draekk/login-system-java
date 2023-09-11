@@ -2,8 +2,6 @@ package Views;
 
 import java.util.Scanner;
 
-import javax.print.attribute.standard.MediaSize.Other;
-
 import Utils.NumberUtils;
 import Utils.OtherUtils;
 
@@ -37,11 +35,11 @@ public class Menu {
             return;
 
           default:
-            throw new Exception("Invalid value");
+            throw new Exception("Invalid option");
         }
       } catch (Exception e) {
         System.err.println("An error has occurred: " + e.getMessage());
-        break;
+        OtherUtils.pressEnter();
       }
     }
   }

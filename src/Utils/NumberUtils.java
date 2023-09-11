@@ -1,5 +1,7 @@
 package Utils;
 
+import java.util.Scanner;
+
 public class NumberUtils {
 
   public int toInt(String value) {
@@ -9,6 +11,7 @@ public class NumberUtils {
       } catch (Exception e) {
         System.err.println("Not a number...");
         System.out.println("Try again.");
+        value = new Scanner(System.in).nextLine();
       }
     }
   }

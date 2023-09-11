@@ -1,5 +1,8 @@
 package Utils;
 
+import java.io.IOException;
+import java.util.Scanner;
+
 public class OtherUtils {
 
   /**
@@ -27,5 +30,18 @@ public class OtherUtils {
 
   public static void consoleClear() {
     System.out.print("\033[2J\033[H");
+  }
+
+  public static void pressEnter() {
+    System.out.println("Press ENTER to continue...");
+    while (true) {
+      try {
+        if (System.in.read() == '\n') {
+          break;
+        }
+      } catch (IOException e) {
+        e.printStackTrace();
+      }
+    }
   }
 }

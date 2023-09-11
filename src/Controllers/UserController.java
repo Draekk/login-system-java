@@ -15,25 +15,21 @@ public class UserController {
    */
   public boolean addUser(User user) {
     try {
+      if (LoginDB.userDatabase == null)
+        LoginDB.userDatabase = new ArrayList<>();
       if (!LoginDB.userDatabase.isEmpty()) {
         for (User u : LoginDB.userDatabase) {
           if (u.getId() == user.getId()) {
-            System.out.println("This user already exist.");
-            return false;
+            throw new Exception("User already exist.");
           } else if (u.getUsername().equals(user.getUsername())) {
-            System.out.println("This Username already exist.");
-            return false;
+            throw new Exception("Username already exist.");
           }
         }
-        LoginDB.userDatabase.add(user);
-        return true;
-      } else {
-        LoginDB.userDatabase = new ArrayList<>();
-        LoginDB.userDatabase.add(user);
-        return true;
       }
+      LoginDB.userDatabase.add(user);
+      return true;
     } catch (Exception e) {
-      System.out.printf("An error has occurred: %s", e.getMessage());
+      System.err.println("An error has occurred: " + e.getMessage());
       return false;
     }
   }
@@ -113,6 +109,16 @@ public class UserController {
     }
   }
   // #endregion
+
+  /**
+   * Creates master user
+   */
+  public void createAdmin() {
+    UserController uc = new UserController();
+    User admin = new User("admin", "admin", "Gever", "Rodriguez", "rodriver1992@gmail.com", 31);
+    admin.setUserType(0);
+    uc.addUser(admin);
+  }
 
   /**
    * Shows in console the list of users
