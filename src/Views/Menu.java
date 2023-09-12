@@ -2,12 +2,18 @@ package Views;
 
 import java.util.Scanner;
 
+import Controllers.AutenticationController;
+import Controllers.UserController;
 import Utils.NumberUtils;
 import Utils.OtherUtils;
+import Models.User;
 
 public class Menu {
 
-  public static void entryMenu() {
+  /**
+   * Shows the entry menu
+   */
+  public void entryMenu() {
     while (true) {
       try {
         OtherUtils ou = new OtherUtils();
@@ -21,7 +27,10 @@ public class Menu {
         switch (nu.toInt(selection)) {
           case 1:
             OtherUtils.consoleClear();
-            System.out.println("Login menu");
+            if (loginMenu()) {
+              System.out.println("You have logged in");
+              OtherUtils.pressEnter();
+            }
             break;
 
           case 2:
@@ -40,6 +49,27 @@ public class Menu {
       } catch (Exception e) {
         System.err.println("An error has occurred: " + e.getMessage());
         OtherUtils.pressEnter();
+      }
+    }
+  }
+
+  private boolean loginMenu() {
+    while (true) {
+      try {
+        OtherUtils ou = new OtherUtils();
+        UserController uc = new UserController();
+        AutenticationController ac = new AutenticationController();
+        Scanner sc = new Scanner(System.in);
+
+        OtherUtils.consoleClear();
+        ou.decorateTitle("Login", '*');
+        System.out.println("Username:");
+        String _username = sc.nextLine();
+        System.out.println("Password:");
+        String _password = sc.nextLine();
+        return ac.loginProcess(_username, _password);
+      } catch (Exception e) {
+        System.err.println("An error has occurred: " + e.getMessage());
       }
     }
   }

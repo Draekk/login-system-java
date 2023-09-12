@@ -10,6 +10,8 @@ public class User implements Cloneable {
   private String username;
   private String password;
   private UserType userType;
+  private int attempts;
+  private boolean isBloqued;
   // #endregion
 
   // #region Getters and Setters
@@ -56,6 +58,22 @@ public class User implements Cloneable {
       System.err.println("An error has occurred: " + e.getMessage());
     }
   }
+
+  public int getAttempts() {
+    return this.attempts;
+  }
+
+  public void setAttempts(int value) {
+    this.attempts = value;
+  }
+
+  public boolean getIsBloqued() {
+    return this.isBloqued;
+  }
+
+  public void setIsBloqued() {
+    this.isBloqued = isBloqued ? false : true;
+  }
   // #endregion
 
   // #region Overrides methods
@@ -91,6 +109,8 @@ public class User implements Cloneable {
     this.profile = new Profile(name, lastName, email, age);
     this.profile.setUserId(this.id);
     setUserType(2);
+    setAttempts(3);
+    this.isBloqued = false;
   }
   // #endregion
 }

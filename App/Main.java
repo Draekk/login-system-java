@@ -5,12 +5,13 @@ class Main {
 
   public static void main(String[] args) {
     UserController uc = new UserController();
+    Menu menu = new Menu();
 
     // Create Admin user
     uc.createAdmin();
 
     // Start app
-    Menu.entryMenu();
+    menu.entryMenu();
 
   }
 }
