@@ -9,6 +9,9 @@ public class User implements Cloneable {
   private Profile profile;
   private String username;
   private String password;
+  private UserType userType;
+  private int attempts;
+  private boolean isBloqued;
   // #endregion
 
   // #region Getters and Setters
@@ -25,11 +28,51 @@ public class User implements Cloneable {
   }
 
   public String getPassword() {
-    return this.password.replace(password, "********");
+    return this.password;
   }
 
   public void setPassword(String password) {
     this.password = password;
+  }
+
+  public UserType getUserType() {
+    return this.userType;
+  }
+
+  public void setUserType(int index) {
+    try {
+      switch (index) {
+        case 0:
+          this.userType = UserType.ADMIN;
+          break;
+        case 1:
+          this.userType = UserType.MODERATOR;
+          break;
+        case 2:
+          this.userType = UserType.MEMBER;
+          break;
+        default:
+          throw new Exception("Index out of range. Index should be between 0 and 2.");
+      }
+    } catch (Exception e) {
+      System.err.println("An error has occurred: " + e.getMessage());
+    }
+  }
+
+  public int getAttempts() {
+    return this.attempts;
+  }
+
+  public void setAttempts(int value) {
+    this.attempts = value;
+  }
+
+  public boolean getIsBloqued() {
+    return this.isBloqued;
+  }
+
+  public void setIsBloqued() {
+    this.isBloqued = isBloqued ? false : true;
   }
   // #endregion
 
@@ -38,7 +81,8 @@ public class User implements Cloneable {
   public String toString() {
     return "User ID: " + this.id + "\n" +
         "Username: " + this.username + "\n" +
-        "Password: " + this.getPassword() + "\n" +
+        "Password: " + this.getPassword().replace(getPassword(), "********") + "\n" +
+        "User Type: " + this.userType + "\n" +
         "Profile detail:\n" +
         this.profile;
   }
@@ -64,6 +108,9 @@ public class User implements Cloneable {
     this.password = password;
     this.profile = new Profile(name, lastName, email, age);
     this.profile.setUserId(this.id);
+    setUserType(2);
+    setAttempts(3);
+    this.isBloqued = false;
   }
   // #endregion
 }
