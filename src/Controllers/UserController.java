@@ -21,8 +21,6 @@ public class UserController {
         for (User u : LoginDB.userDatabase) {
           if (u.getId() == user.getId()) {
             throw new Exception("User already exist.");
-          } else if (u.getUsername().equals(user.getUsername())) {
-            throw new Exception("Username already exist.");
           }
         }
       }
@@ -49,10 +47,8 @@ public class UserController {
             return user.clone();
           }
         }
-        throw new Exception("User not found");
-      } else {
-        throw new Exception("Empty list!");
       }
+      return null;
     } catch (Exception e) {
       System.err.println("An error has occurred: " + e.getMessage());
       return null;

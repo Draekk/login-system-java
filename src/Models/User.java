@@ -28,7 +28,7 @@ public class User implements Cloneable {
   }
 
   public String getPassword() {
-    return this.password.replace(password, "********");
+    return this.password;
   }
 
   public void setPassword(String password) {
@@ -81,7 +81,7 @@ public class User implements Cloneable {
   public String toString() {
     return "User ID: " + this.id + "\n" +
         "Username: " + this.username + "\n" +
-        "Password: " + this.getPassword() + "\n" +
+        "Password: " + this.getPassword().replace(getPassword(), "********") + "\n" +
         "User Type: " + this.userType + "\n" +
         "Profile detail:\n" +
         this.profile;
